@@ -1,0 +1,21 @@
+<h3> Access Log </h3>
+<form (ngSubmit)="onLogFormSubmit(logForm)" #logForm="ngForm" novalidate>
+  <div>
+    <label for="person">Name:</label>
+    <input type="text" name="person" #personAccess="ngModel" [(ngModel)]="person">
+    <ul *ngIf="!personAccess.valid && personAccess.touched" class="error">
+      <li *ngIf="personAccess.errors.required">Person name is required</li>
+      <li *ngIf="personAccess.errors.minlength">Person name must be at least 3 chars</li>
+    </ul>
+  </div>
+  <div>
+    <label for="message">Message:</label>
+    <input type="text" name="message" [(ngModel)]="message" #logMessage="ngModel" required minlength="10">
+    <ul *ngIf="!logMessage.valid && logMessage.touched" class="error">
+      <li *ngIf="logMessage.errors.required">Message is required</li>
+      <li *ngIf="logMessage.errors.minlength">Message must be at least 10 chars</li>
+    </ul>
+  </div>
+  <button type="submit"[disabled]="!loginForm.valid">Add log</button>
+  <p *ngIf="showSuccessMessage" class="success">Successfully registration!</p>
+</form>
